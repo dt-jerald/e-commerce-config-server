@@ -1,8 +1,8 @@
 spring:
   datasource:
-  url: jdbc:mysql://localhost:3306/product_service_db
-  username: root
-  password: Jerald@123!
+    url: jdbc:mysql://localhost:3306/product_service_db
+    username: root
+    password: Jerald@123!
 
   jpa:
     hibernate:
