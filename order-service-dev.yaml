@@ -12,3 +12,34 @@ spring:
     properties:
       hibernate:
         dialect : org.hibernate.dialect.MySQLDialect
+resilience4j:
+  retry:
+    instances:
+      INVENTORY-SERVICE:
+        max-attempts: 3
+        wait-duration: 500ms
+        enable-exponential-backoff: true
+      CART-SERVICE:
+        max-attempts: 3
+        wait-duration: 300ms
+        enable-exponential-backoff: true
+      PAYMENT-SERVICE:
+        max-attempts: 3
+        wait-duration: 300ms
+        enable-exponential-backoff: true
+  circuitbreaker:
+    configs:
+      default:
+        registerHealthIndicator: true
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 5
+        permittedNumberOfCallsInHalfOpenState: 3
+        waitDurationInOpenState: 10000
+        failureRateThreshold: 50
+    instances:
+      INVENTORY-SERVICE:
+        baseConfig: default
+      CART-SERVICE:
+        baseConfig: default
+      PAYMENT-SERVICE:
+        baseConfig: default
